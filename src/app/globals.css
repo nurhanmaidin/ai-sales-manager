@@ -1,0 +1,150 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Surfaces */
+    --background: 0 0% 100%;
+    --canvas: 220 23% 98%;
+    --card: 0 0% 100%;
+    --card-foreground: 226 36% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 226 36% 12%;
+    --sidebar: 220 23% 98%;
+    --sidebar-border: 220 16% 91%;
+
+    /* Ink */
+    --foreground: 226 36% 12%;
+    --muted: 220 18% 96%;
+    --muted-foreground: 222 12% 38%;
+    --subtle: 222 8% 45%;
+
+    /* Brand: deep indigo-navy */
+    --primary: 234 54% 33%;
+    --primary-foreground: 0 0% 100%;
+    --primary-soft: 232 60% 96.5%;
+
+    --secondary: 220 18% 96%;
+    --secondary-foreground: 226 36% 14%;
+    --accent: 220 20% 95.5%;
+    --accent-foreground: 226 36% 12%;
+
+    /* Semantic */
+    --success: 154 52% 32%;
+    --success-foreground: 0 0% 100%;
+    --success-soft: 150 45% 95%;
+    --warning: 30 88% 33%;
+    --warning-foreground: 0 0% 100%;
+    --warning-soft: 40 90% 95%;
+    --destructive: 2 58% 47%;
+    --destructive-foreground: 0 0% 100%;
+    --destructive-soft: 4 70% 96.5%;
+    --info: 212 64% 42%;
+    --info-soft: 212 70% 96%;
+
+    /* Lines */
+    --border: 220 16% 90%;
+    --input: 220 14% 86%;
+    --ring: 234 54% 45%;
+
+    --radius: 0.625rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-background text-base text-foreground;
+    font-feature-settings: "cv11", "ss01";
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring/40 ring-offset-1 ring-offset-background;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.14);
+  }
+
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer components {
+  .skeleton {
+    @apply relative overflow-hidden rounded-md bg-muted;
+  }
+  .skeleton::after {
+    content: "";
+    @apply absolute inset-0 -translate-x-full;
+    background: linear-gradient(90deg, transparent, hsl(0 0% 100% / 0.6), transparent);
+    animation: shimmer 1.4s infinite;
+  }
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Print — used by the quotation document
+   ------------------------------------------------------------------ */
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm 14mm 16mm;
+  }
+  html,
+  body {
+    background: #fff !important;
+    font-size: 10.5pt;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  .print-surface {
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: none !important;
+  }
+  .print-avoid-break {
+    break-inside: avoid;
+  }
+  a {
+    color: inherit !important;
+    text-decoration: none !important;
+  }
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
+.print-only {
+  display: none;
+}
